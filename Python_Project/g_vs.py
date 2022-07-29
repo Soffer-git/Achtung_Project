@@ -5,7 +5,10 @@ HEIGHT = -1
 BORDER_SIZE = (100, 100)
 BACKGROUND_COLOR = (0, 0, 0)
 AMOUNT_OF_PLAYERS = 2
+RADIUS = 5
+SPEED = 1
 PLAYERS_PATH = "players_data.txt"
+CHARACTER_IMAGE = "ball.jpg"
 
 COLOR_DICT = {
                  "Red": (255, 0, 0),
