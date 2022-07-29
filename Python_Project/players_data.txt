@@ -1,0 +1,4 @@
+Red, Left, Right, Down
+Green, 1, A, Q
+Blue, B, M, N
+Pink, 3, 9, 6
