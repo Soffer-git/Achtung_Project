@@ -4,9 +4,11 @@ WIDTH = -1
 HEIGHT = -1
 BORDER_SIZE = (100, 100)
 BACKGROUND_COLOR = (0, 0, 0)
-AMOUNT_OF_PLAYERS = 2
+AMOUNT_OF_PLAYERS = 4
 RADIUS = 5
-SPEED = 1
+SPEED = 5
+FRAMES_FOR_MOVE = 15
+ITERS_FOR_TURN = 2
 PLAYERS_PATH = "players_data.txt"
 CHARACTER_IMAGE = "ball.jpg"
 
@@ -24,8 +26,8 @@ COLOR_DICT = {
 
 KEYS_DICT = {
     # Player 1
-    "Right": pygame.K_LEFT,
-    "Left": pygame.K_RIGHT,
+    "Left": pygame.K_LEFT,
+    "Right": pygame.K_RIGHT,
     "Down": pygame.K_DOWN,
 
     # Player 2
