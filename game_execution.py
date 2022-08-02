@@ -31,10 +31,11 @@ if __name__ == "__main__":
             pygame.draw.circle(screen, player.color, player.pos, g_vs.THICKNESS, width=0)
             pygame.display.update()
 
-        curr_turn = 0
         time_before_start = time.perf_counter()
+        curr_turn = 0
         time_exceeded_delay = False
         game_runs = True
+
         while game_runs:
             if not time_exceeded_delay:
                 curr_time = time.perf_counter()
@@ -47,7 +48,7 @@ if __name__ == "__main__":
                     window_runs = False
                     game_runs = False
                 if event.type == pygame.KEYDOWN:
-                    if event.key == g_vs.KEYS_DICT["R"]:
+                    if event.key == g_vs.KEYS_DICT["Reset"]:
                         game_runs = False
                     elif time_exceeded_delay:
                         for player in players:

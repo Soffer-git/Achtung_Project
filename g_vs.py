@@ -52,7 +52,7 @@ KEYS_DICT = {
     "6": pygame.K_6,
 
     # Other keys
-    "R": pygame.K_r,
+    "Reset": pygame.K_r,
     "Straight": "Straight",
     "Stop": "Stop"
 }
