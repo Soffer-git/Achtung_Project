@@ -1,5 +1,6 @@
 import pygame
 
+
 WIDTH = -1
 HEIGHT = -1
 BORDER_SIZE = (100, 100)

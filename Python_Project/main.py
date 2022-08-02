@@ -1,6 +1,7 @@
 import Player
 import g_vs
 
+
 import sys
 import pygame
 pygame.init()
@@ -40,7 +41,6 @@ if __name__ == "__main__":
                         player.last_pressed = None
                     if player.r_key == event.key:
                         player.last_pressed = None
-
 
         if curr_turn == g_vs.FRAMES_FOR_MOVE:
             for player in players:

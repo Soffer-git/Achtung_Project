@@ -1,7 +1,7 @@
-import copy
-
 import g_vs
 
+
+import copy
 import random
 
 
