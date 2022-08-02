@@ -8,13 +8,22 @@ import time
 pygame.init()
 
 
+def make_transparent(image, color):
+    for x in range(image.get_width()):
+        for y in range(image.get_height()):
+            if image.get_at((x, y)) == color:
+                image.set_at((x, y), g_vs.COLOR_DICT["Transparent"])
+    return image
+
+
 if __name__ == "__main__":
     # Screen creation
     infoObject = pygame.display.Info()
     g_vs.WIDTH = infoObject.current_w  # Using the width of the computer screen the window is presented on.
     g_vs.HEIGHT = infoObject.current_h  # Using the height of the computer screen the window is presented on.
-    screen = pygame.display.set_mode((g_vs.WIDTH, g_vs.HEIGHT), pygame.FULLSCREEN)
-    # screen = pygame.display.set_mode((g_vs.WIDTH, g_vs.HEIGHT))
+    # screen = pygame.display.set_mode((g_vs.WIDTH, g_vs.HEIGHT), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((g_vs.WIDTH, g_vs.HEIGHT))
+    head = make_transparent(pygame.image.load(g_vs.HEAD_IMAGE), g_vs.COLOR_DICT["Black"])
 
     window_runs = True
     while window_runs:
@@ -28,8 +37,10 @@ if __name__ == "__main__":
         for line in players_file_lines:
             players.append(Player.Player(line))
         for player in players:
+            screen.blit(head, (player.pos[0] - g_vs.HEAD_RADIUS, player.pos[1] - g_vs.HEAD_RADIUS))
+        pygame.display.update()
+        for player in players:
             pygame.draw.circle(screen, player.color, player.pos, g_vs.THICKNESS, width=0)
-            pygame.display.update()
 
         time_before_start = time.perf_counter()
         curr_turn = 0
@@ -73,15 +84,15 @@ if __name__ == "__main__":
                                     player.turn_direction = player.l_key
                                 else:
                                     player.turn_direction = "Straight"
-
-            if curr_turn == g_vs.FRAMES_FOR_MOVE:
-                for player in players:
-                    player.manage_movement()
-                    pygame.draw.circle(screen, player.color, player.pos, g_vs.THICKNESS, width=0)
+            if time_exceeded_delay:
+                if curr_turn == g_vs.FRAMES_FOR_MOVE:
+                    for player in players:
+                        player.manage_movement()
+                        screen.blit(head, (player.pos[0] - g_vs.HEAD_RADIUS, player.pos[1] - g_vs.HEAD_RADIUS))
                     pygame.display.update()
-                curr_turn = 0
-            else:
-                curr_turn += 1
-
-            pygame.display.flip()
+                    for player in players:
+                        pygame.draw.circle(screen, player.color, player.pos, g_vs.THICKNESS, width=0)
+                    curr_turn = 0
+                else:
+                    curr_turn += 1
     sys.exit()

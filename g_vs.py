@@ -11,7 +11,8 @@ COLOR_DICT = {
                  "Lime": (170, 120, 80),
                  "Brown": (150, 75, 0),
                  "Cyan": (0, 255, 255),
-                 "Black": (0, 0, 0)
+                 "Black": (0, 0, 0),
+                 "Transparent": (0, 0, 0, 0)
 }
 
 
@@ -22,12 +23,14 @@ BORDER_SIZE = (100, 100)
 GAME_START_DELAY = 0.5
 BACKGROUND_COLOR = COLOR_DICT["Black"]
 AMOUNT_OF_PLAYERS = 4
-THICKNESS = 5  # The thickness of the trails.
+THICKNESS = 7  # The thickness of the trails.
+HEAD_RADIUS = 5
 SPEED = 5
-FRAMES_FOR_MOVE = 15
+FRAMES_FOR_MOVE = 10000
 ITERS_FOR_TURN = 4
 PLAYERS_PATH = "players_data.txt"
-CHARACTER_IMAGE = "ball.jpg"  # The image used as the head of the players.
+HEAD_IMAGE = "ball.png"  # The image used as the head of the players.
+CLEAR_IMAGE = "black.png"  # The image used as the head of the players.
 
 
 KEYS_DICT = {
