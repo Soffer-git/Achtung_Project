@@ -8,7 +8,7 @@ import itertools
 def parse_player_line(line):
     arguments = line.strip().split(', ')
     return g_vs.COLOR_DICT[arguments[0]], g_vs.KEYS_DICT[arguments[1]], \
-        g_vs.KEYS_DICT[arguments[2]], g_vs.KEYS_DICT[arguments[3]]
+           g_vs.KEYS_DICT[arguments[2]], g_vs.KEYS_DICT[arguments[3]]
 
 
 class Player:
@@ -29,6 +29,16 @@ class Player:
         self.l_pressed = False
         self.r_pressed = False
         self.lives = 1
+
+    def detect_collisions(self, center):
+        if not g_vs.CIRCLE_MAT:
+            g_vs.CIRCLE_MAT = [[x ** 2 + y ** 2 <= g_vs.THICKNESS ** 2 for y in g_vs.THICKNESS_RANGE]
+                               for x in g_vs.THICKNESS_RANGE]
+        return any([g_vs.CIRCLE_MAT[x + g_vs.THICKNESS][y + g_vs.THICKNESS]
+                    and 0 <= x + center[0] < g_vs.WIDTH
+                    and 0 <= y + center[1] < g_vs.HEIGHT
+                    and g_vs.SCREEN.get_at((x + center[0], y + center[1])) != g_vs.COLOR_DICT["Black"]
+                    for x, y in itertools.product(g_vs.THICKNESS_RANGE, g_vs.THICKNESS_RANGE)])
 
     def turn_left(self):
         new_speed = copy.copy(self.speed)
@@ -74,17 +84,6 @@ class Player:
 
         self.speed = new_speed
 
-    def detect_collisions(self, center):
-        if g_vs.CIRCLE_MAT == None:
-            g_vs.CIRCLE_MAT = [[x ** 2 + y ** 2 <= g_vs.THICKNESS ** 2 for y in g_vs.THICKNESS_RANGE]
-                      for x in g_vs.THICKNESS_RANGE]
-        return any([g_vs.CIRCLE_MAT[x + g_vs.THICKNESS][y + g_vs.THICKNESS]
-                    and 0 <= x + center[0] < g_vs.WIDTH
-                    and 0 <= y + center[1] < g_vs.HEIGHT
-                    and g_vs.SCREEN.get_at((x + center[0], y + center[1])) != g_vs.COLOR_DICT["Black"]
-                    for x, y in itertools.product(g_vs.THICKNESS_RANGE, g_vs.THICKNESS_RANGE)])
-
-
     def manage_movement(self):
         if self.lives == 0 or self.turn_direction == "Stop":
             return
@@ -103,7 +102,7 @@ class Player:
         new_pos = (self.pos[0] + self.speed[0], self.pos[1] + self.speed[1])
         pygame.draw.circle(g_vs.SCREEN, g_vs.COLOR_DICT["Black"], self.pos, g_vs.THICKNESS, width=0)
         if new_pos[0] < g_vs.THICKNESS or new_pos[0] > g_vs.WIDTH - g_vs.THICKNESS \
-                or new_pos[1] < g_vs.THICKNESS or new_pos[1] > g_vs.HEIGHT - g_vs.THICKNESS\
+                or new_pos[1] < g_vs.THICKNESS or new_pos[1] > g_vs.HEIGHT - g_vs.THICKNESS \
                 or self.detect_collisions(new_pos):
             self.lives = 0
         pygame.draw.circle(g_vs.SCREEN, self.color, self.pos, g_vs.THICKNESS, width=0)
