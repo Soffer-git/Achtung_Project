@@ -1,20 +1,18 @@
 import pygame
 
-
 COLOR_DICT = {
-                 "Red": (255, 0, 0),
-                 "Green": (0, 255, 0),
-                 "Blue": (0, 0, 255),
-                 "Pink": (255, 0, 200),
-                 "Purple": (150, 0, 255),
-                 "Orange": (200, 150, 0),
-                 "Lime": (170, 120, 80),
-                 "Brown": (150, 75, 0),
-                 "Cyan": (0, 255, 255),
-                 "Black": (0, 0, 0),
-                 "Transparent": (0, 0, 0, 0)
+    "Red": (255, 0, 0),
+    "Green": (0, 255, 0),
+    "Blue": (0, 0, 255),
+    "Pink": (255, 0, 200),
+    "Purple": (150, 0, 255),
+    "Orange": (200, 150, 0),
+    "Lime": (170, 120, 80),
+    "Brown": (150, 75, 0),
+    "Cyan": (0, 255, 255),
+    "Black": (0, 0, 0),
+    "Transparent": (0, 0, 0, 0)
 }
-
 
 SCREEN = None
 WIDTH = -1
@@ -30,11 +28,10 @@ CIRCLE_MAT = None
 HEAD_RADIUS = 5
 SPEED = 5
 FRAMES_FOR_MOVE = 10000
-ITERS_FOR_TURN = 4
+ITERS_FOR_TURN = 3
 PLAYERS_PATH = "players_data.txt"
 HEAD_IMAGE = "ball.png"  # The image used as the head of the players.
 CLEAR_IMAGE = "black.png"  # The image used as the head of the players.
-
 
 KEYS_DICT = {
     # Player 1
