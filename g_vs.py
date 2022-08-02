@@ -19,12 +19,13 @@ WIDTH = -1
 HEIGHT = -1
 # The minimum distance between the starting location of the players, and the edges of the screen.
 BORDER_SIZE = (100, 100)
+GAME_START_DELAY = 0.5
 BACKGROUND_COLOR = COLOR_DICT["Black"]
 AMOUNT_OF_PLAYERS = 4
-RADIUS = 5  # The thickness of the trails.
+THICKNESS = 5  # The thickness of the trails.
 SPEED = 5
 FRAMES_FOR_MOVE = 15
-ITERS_FOR_TURN = 3
+ITERS_FOR_TURN = 4
 PLAYERS_PATH = "players_data.txt"
 CHARACTER_IMAGE = "ball.jpg"  # The image used as the head of the players.
 
@@ -51,4 +52,7 @@ KEYS_DICT = {
     "6": pygame.K_6,
 
     # Other keys
+    "R": pygame.K_r,
+    "Straight": "Straight",
+    "Stop": "Stop"
 }
