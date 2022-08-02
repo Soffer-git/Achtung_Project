@@ -1,6 +1,8 @@
 import g_vs
+import pygame
 import copy
 import random
+import itertools
 
 
 def parse_player_line(line):
@@ -27,27 +29,6 @@ class Player:
         self.l_pressed = False
         self.r_pressed = False
         self.lives = 1
-
-    def manage_movement(self):
-        if self.lives == 0 or self.turn_direction == "Stop":
-            return
-        if self.turn_direction == self.l_key:
-            if self.turn_count == g_vs.ITERS_FOR_TURN:
-                self.turn_left()
-                self.turn_count = 0
-            else:
-                self.turn_count += 1
-        elif self.turn_direction == self.r_key:
-            if self.turn_count == g_vs.ITERS_FOR_TURN:
-                self.turn_right()
-                self.turn_count = 0
-            else:
-                self.turn_count += 1
-        self.pos[0] += self.speed[0]
-        self.pos[1] += self.speed[1]
-        if self.pos[0] < g_vs.THICKNESS or self.pos[0] > g_vs.WIDTH - g_vs.THICKNESS \
-                or self.pos[1] < g_vs.THICKNESS or self.pos[1] > g_vs.HEIGHT - g_vs.THICKNESS:
-            self.lives = 0
 
     def turn_left(self):
         new_speed = copy.copy(self.speed)
@@ -92,6 +73,42 @@ class Player:
             new_speed[0] += 1
 
         self.speed = new_speed
+
+    def detect_collisions(self, center):
+        if g_vs.CIRCLE_MAT == None:
+            g_vs.CIRCLE_MAT = [[x ** 2 + y ** 2 <= g_vs.THICKNESS ** 2 for y in g_vs.THICKNESS_RANGE]
+                      for x in g_vs.THICKNESS_RANGE]
+        return any([g_vs.CIRCLE_MAT[x + g_vs.THICKNESS][y + g_vs.THICKNESS]
+                    and 0 <= x + center[0] < g_vs.WIDTH
+                    and 0 <= y + center[1] < g_vs.HEIGHT
+                    and g_vs.SCREEN.get_at((x + center[0], y + center[1])) != g_vs.COLOR_DICT["Black"]
+                    for x, y in itertools.product(g_vs.THICKNESS_RANGE, g_vs.THICKNESS_RANGE)])
+
+
+    def manage_movement(self):
+        if self.lives == 0 or self.turn_direction == "Stop":
+            return
+        if self.turn_direction == self.l_key:
+            if self.turn_count == g_vs.ITERS_FOR_TURN:
+                self.turn_left()
+                self.turn_count = 0
+            else:
+                self.turn_count += 1
+        elif self.turn_direction == self.r_key:
+            if self.turn_count == g_vs.ITERS_FOR_TURN:
+                self.turn_right()
+                self.turn_count = 0
+            else:
+                self.turn_count += 1
+        new_pos = (self.pos[0] + self.speed[0], self.pos[1] + self.speed[1])
+        pygame.draw.circle(g_vs.SCREEN, g_vs.COLOR_DICT["Black"], self.pos, g_vs.THICKNESS, width=0)
+        if new_pos[0] < g_vs.THICKNESS or new_pos[0] > g_vs.WIDTH - g_vs.THICKNESS \
+                or new_pos[1] < g_vs.THICKNESS or new_pos[1] > g_vs.HEIGHT - g_vs.THICKNESS\
+                or self.detect_collisions(new_pos):
+            self.lives = 0
+        pygame.draw.circle(g_vs.SCREEN, self.color, self.pos, g_vs.THICKNESS, width=0)
+        self.pos[0] += self.speed[0]
+        self.pos[1] += self.speed[1]
 
     # Implement this!
     def shoot(self):
