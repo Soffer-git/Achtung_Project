@@ -11,8 +11,7 @@ COLOR_DICT = {
                  "Lime": (170, 120, 80),
                  "Brown": (150, 75, 0),
                  "Cyan": (0, 255, 255),
-                 "Black": (0, 0, 0),
-                 "Transparent": (0, 0, 0, 0)
+                 "Black": (0, 0, 0)
 }
 
 
@@ -20,17 +19,14 @@ WIDTH = -1
 HEIGHT = -1
 # The minimum distance between the starting location of the players, and the edges of the screen.
 BORDER_SIZE = (100, 100)
-GAME_START_DELAY = 0.5
 BACKGROUND_COLOR = COLOR_DICT["Black"]
 AMOUNT_OF_PLAYERS = 4
-THICKNESS = 7  # The thickness of the trails.
-HEAD_RADIUS = 5
+RADIUS = 5  # The thickness of the trails.
 SPEED = 5
-FRAMES_FOR_MOVE = 10000
-ITERS_FOR_TURN = 4
+FRAMES_FOR_MOVE = 15
+ITERS_FOR_TURN = 3
 PLAYERS_PATH = "players_data.txt"
-HEAD_IMAGE = "ball.png"  # The image used as the head of the players.
-CLEAR_IMAGE = "black.png"  # The image used as the head of the players.
+CHARACTER_IMAGE = "ball.jpg"  # The image used as the head of the players.
 
 
 KEYS_DICT = {
@@ -55,7 +51,4 @@ KEYS_DICT = {
     "6": pygame.K_6,
 
     # Other keys
-    "Reset": pygame.K_r,
-    "Straight": "Straight",
-    "Stop": "Stop"
 }

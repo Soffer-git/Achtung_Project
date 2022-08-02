@@ -23,14 +23,11 @@ class Player:
 
         self.speed = [starting_x_sign * starting_x_velocity, starting_y_sign * starting_y_velocity]
         self.turn_count = 0
-        self.turn_direction = "Stop"
+        self.turn_direction = None
         self.l_pressed = False
         self.r_pressed = False
-        self.lives = 1
 
     def manage_movement(self):
-        if self.lives == 0 or self.turn_direction == "Stop":
-            return
         if self.turn_direction == self.l_key:
             if self.turn_count == g_vs.ITERS_FOR_TURN:
                 self.turn_left()
@@ -45,9 +42,6 @@ class Player:
                 self.turn_count += 1
         self.pos[0] += self.speed[0]
         self.pos[1] += self.speed[1]
-        if self.pos[0] < g_vs.THICKNESS or self.pos[0] > g_vs.WIDTH - g_vs.THICKNESS \
-                or self.pos[1] < g_vs.THICKNESS or self.pos[1] > g_vs.HEIGHT - g_vs.THICKNESS:
-            self.lives = 0
 
     def turn_left(self):
         new_speed = copy.copy(self.speed)
