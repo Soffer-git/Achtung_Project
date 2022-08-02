@@ -16,6 +16,7 @@ COLOR_DICT = {
 }
 
 
+SCREEN = None
 WIDTH = -1
 HEIGHT = -1
 # The minimum distance between the starting location of the players, and the edges of the screen.
@@ -24,6 +25,8 @@ GAME_START_DELAY = 0.5
 BACKGROUND_COLOR = COLOR_DICT["Black"]
 AMOUNT_OF_PLAYERS = 4
 THICKNESS = 7  # The thickness of the trails.
+THICKNESS_RANGE = range(-THICKNESS, THICKNESS + 1)
+CIRCLE_MAT = None
 HEAD_RADIUS = 5
 SPEED = 5
 FRAMES_FOR_MOVE = 10000
